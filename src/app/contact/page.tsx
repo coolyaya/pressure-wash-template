@@ -1,11 +1,23 @@
-import site from "@/content/site.json";
+import rawSite from "@/content/site.json";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+// ✅ Extend inferred JSON type to include forms (optional)
+const site = rawSite as typeof rawSite & {
+  forms?: {
+    quoteFormAction?: string;
+    redirectUrl?: string;
+  };
+};
+
 export default function ContactPage() {
+  const formAction = site.forms?.quoteFormAction ?? "https://formspree.io/f/xwvejjjd";
+  const redirectUrl =
+    site.forms?.redirectUrl ?? "https://pressure-wash-template.vercel.app/thanks";
+
   return (
     <SiteShell>
       <main className="mx-auto max-w-6xl px-4 py-16">
@@ -56,36 +68,72 @@ export default function ContactPage() {
             </CardHeader>
 
             <CardContent>
-              <form
-                action="https://formspree.io/f/xwvejjjd"
-                method="POST"
-                className="space-y-4"
-              >
+              <form action={formAction} method="POST" className="space-y-4">
+                {/* ✅ Subject improves deliverability */}
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value={`New Quote Request — ${site.businessName}`}
+                />
+
+                {/* ✅ Redirect reliability: include both */}
+                <input type="hidden" name="_redirect" value={redirectUrl} />
+                <input type="hidden" name="_next" value={redirectUrl} />
+
+                {/* ✅ Honeypot */}
+                <input
+                  type="text"
+                  name="_gotcha"
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                {/* ✅ Metadata */}
+                <input type="hidden" name="source" value="website-contact-page" />
+                <input type="hidden" name="site" value={site.businessName} />
+
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Name</label>
-                  <Input name="name" placeholder="Your name" required />
+                  <label className="text-sm font-medium" htmlFor="name">
+                    Name
+                  </label>
+                  <Input id="name" name="name" placeholder="Your name" required />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Phone</label>
-                  <Input name="phone" placeholder="(555) 123-4567" required />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Email</label>
+                  <label className="text-sm font-medium" htmlFor="phone">
+                    Phone
+                  </label>
                   <Input
-                    name="email"
-                    type="email"
-                    placeholder="you@email.com"
+                    id="phone"
+                    name="phone"
+                    placeholder="(555) 123-4567"
                     required
+                    inputMode="tel"
+                    autoComplete="tel"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">
+                  <label className="text-sm font-medium" htmlFor="email">
+                    Email
+                  </label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                    autoComplete="email"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium" htmlFor="message">
                     What needs cleaning?
                   </label>
                   <Textarea
+                    id="message"
                     name="message"
                     placeholder="Example: driveway cleaning + house wash. Address: ..."
                     rows={5}
@@ -93,21 +141,9 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Honeypot field (spam trap) */}
-                <div className="hidden" aria-hidden="true">
-                  <label className="sr-only">
-                    Don’t fill this out if you’re human:
-                    <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
-                  </label>
-                </div>
-
-                {/* Redirect after submission */}
-                <input type="hidden" name="_redirect" value="https://pressure-wash-template.vercel.app/thanks" />
-
                 <Button type="submit" className="w-full">
                   Get My Quote
                 </Button>
-
               </form>
 
               <p className="mt-4 text-xs text-muted-foreground">
