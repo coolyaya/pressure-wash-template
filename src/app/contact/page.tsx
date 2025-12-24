@@ -102,7 +102,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Redirect after submission */}
-                <input type="hidden" name="_redirect" value="http://localhost:3000/thanks" />
+                <input type="hidden" name="_redirect" value="https://pressure-wash-template.vercel.app/thanks" />
 
                 <Button type="submit" className="w-full">
                   Get My Quote
