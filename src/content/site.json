@@ -1,0 +1,75 @@
+{
+  "businessName": "BrightWash Pressure Washing",
+  "tagline": "Exterior cleaning that makes your home look brand new.",
+  "phone": "(555) 123-4567",
+  "email": "brightwash@example.com",
+  "city": "Tampa, FL",
+  "serviceAreas": ["Tampa", "Brandon", "Riverview", "Plant City"],
+  "primaryCta": "Get a Free Quote",
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Services", "href": "/services" },
+    { "label": "About", "href": "/about" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "hero": {
+    "headline": "Pressure Washing That Instantly Boosts Curb Appeal",
+    "subheadline": "Driveways, sidewalks, siding, patios, fences, and more. Fast quotes and reliable scheduling.",
+    "bullets": ["Licensed & insured", "Soft wash safe for siding", "Satisfaction guaranteed"]
+  },
+  "services": [
+    {
+      "title": "Driveway & Sidewalk Cleaning",
+      "desc": "Remove oil stains, algae, dirt, and years of buildup for a clean, safe surface."
+    },
+    {
+      "title": "House Washing (Soft Wash)",
+      "desc": "Gentle exterior cleaning for siding that removes mold and mildew without damage."
+    },
+    {
+      "title": "Deck & Patio Cleaning",
+      "desc": "Refresh outdoor spaces by removing grime and stains while protecting the surface."
+    },
+    {
+      "title": "Fence Cleaning",
+      "desc": "Restore fences by removing discoloration, algae, and dirt buildup."
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Sarah M.",
+      "text": "Our driveway looked brand new. Quick scheduling and great communication."
+    },
+    {
+      "name": "James T.",
+      "text": "They soft washed our home and it turned out amazing. Professional and on time."
+    },
+    {
+      "name": "Linda P.",
+      "text": "Super fair pricing and the results were better than expected."
+    }
+  ],
+  "about": {
+    "headline": "Local Pressure Washing With Professional Results",
+    "body": "We help homeowners and small businesses keep their exterior surfaces clean and protected. From driveways to siding, we use the right cleaning method for the job."
+  },
+  "faq": [
+    {
+      "q": "How much does pressure washing cost?",
+      "a": "Pricing depends on the size and surface type. Contact us for a fast, free quote."
+    },
+    {
+      "q": "What is soft washing?",
+      "a": "Soft washing uses low pressure and specialized solutions to safely clean siding and roofs."
+    },
+    {
+      "q": "How soon can you schedule?",
+      "a": "Most jobs can be scheduled within a few days depending on weather and availability."
+    }
+  ],
+  "footer": {
+    "hours": "Mon–Sat: 8am–6pm",
+    "license": "Licensed & Insured",
+    "copyright": "© 2025 BrightWash Pressure Washing. All rights reserved."
+  }
+}
