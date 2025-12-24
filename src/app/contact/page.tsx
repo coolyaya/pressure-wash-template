@@ -1,22 +1,73 @@
-import rawSite from "@/content/site.json";
+"use client";
+
+import { useState } from "react";
+import site from "@/content/site.json";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-// ✅ Extend inferred JSON type to include forms (optional)
-const site = rawSite as typeof rawSite & {
-  forms?: {
-    quoteFormAction?: string;
-    redirectUrl?: string;
-  };
-};
-
 export default function ContactPage() {
-  const formAction = site.forms?.quoteFormAction ?? "https://formspree.io/f/xwvejjjd";
+  const formAction =
+    (site as any)?.forms?.quoteFormAction ?? "https://formspree.io/f/xwvejjjd";
+
   const redirectUrl =
-    site.forms?.redirectUrl ?? "https://pressure-wash-template.vercel.app/thanks";
+    (site as any)?.forms?.redirectUrl ??
+    "https://pressure-wash-template.vercel.app/thanks";
+
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const form = e.currentTarget;
+
+      // Basic honeypot check (extra protection)
+      const gotcha = (form.querySelector('input[name="_gotcha"]') as HTMLInputElement)
+        ?.value;
+      if (gotcha) {
+        // silently succeed to waste bot time
+        window.location.href = redirectUrl;
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      const res = await fetch(formAction, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (res.ok) {
+        // ✅ GUARANTEED redirect
+        window.location.href = redirectUrl;
+        return;
+      }
+
+      // If not ok, try to parse response for debugging
+      let data: any = null;
+      try {
+        data = await res.json();
+      } catch {}
+
+      setError(
+        data?.errors?.[0]?.message ||
+          "Something went wrong. Please call or email us instead."
+      );
+    } catch (err) {
+      setError("Network error. Please try again or contact us directly.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <SiteShell>
@@ -68,15 +119,15 @@ export default function ContactPage() {
             </CardHeader>
 
             <CardContent>
-              <form action={formAction} method="POST" className="space-y-4">
-                {/* ✅ Subject improves deliverability */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* ✅ Helps deliverability and inbox organization */}
                 <input
                   type="hidden"
                   name="_subject"
                   value={`New Quote Request — ${site.businessName}`}
                 />
 
-                {/* ✅ Redirect reliability: include both */}
+                {/* ✅ Formspree still receives this; we just don’t rely on it */}
                 <input type="hidden" name="_redirect" value={redirectUrl} />
                 <input type="hidden" name="_next" value={redirectUrl} />
 
@@ -88,10 +139,6 @@ export default function ContactPage() {
                   tabIndex={-1}
                   autoComplete="off"
                 />
-
-                {/* ✅ Metadata */}
-                <input type="hidden" name="source" value="website-contact-page" />
-                <input type="hidden" name="site" value={site.businessName} />
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium" htmlFor="name">
@@ -141,8 +188,14 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full">
-                  Get My Quote
+                {error && (
+                  <p className="text-sm text-red-600">
+                    {error}
+                  </p>
+                )}
+
+                <Button type="submit" className="w-full" disabled={submitting}>
+                  {submitting ? "Submitting..." : "Get My Quote"}
                 </Button>
               </form>
 
