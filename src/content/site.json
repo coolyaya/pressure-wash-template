@@ -1,4 +1,19 @@
 {
+  "theme": {
+    "brand": {
+      "primary": "217.2 91.2% 59.8%",
+      "primaryForeground": "210 40% 98%",
+      "accent": "142.1 76.2% 36.3%",
+      "accentForeground": "222.2 47.4% 11.2%"
+    },
+    "radius": "2rem"
+  },
+
+  "assets": {
+    "logoText": "BrightWash",
+    "heroImage": "/hero.jpg"
+  },
+
   "businessName": "BrightWash Pressure Washing",
   "tagline": "Exterior cleaning that makes your home look brand new.",
   "phone": "TODO_REPLACE_PHONE",
@@ -16,11 +31,11 @@
     { "label": "Contact", "href": "/contact" }
   ],
   "seo": {
-  "siteUrl": "https://pressure-wash-template.vercel.app",
-  "defaultTitle": "BrightWash Pressure Washing | Tampa, FL",
-  "defaultDescription": "Licensed & insured pressure washing in Tampa, FL. Driveways, sidewalks, house washing (soft wash), patios, and fences. Fast quotes and reliable scheduling.",
-  "ogImage": "/og.jpg"
-},
+    "siteUrl": "https://pressure-wash-template.vercel.app",
+    "defaultTitle": "BrightWash Pressure Washing | Tampa, FL",
+    "defaultDescription": "Licensed & insured pressure washing in Tampa, FL. Driveways, sidewalks, house washing (soft wash), patios, and fences. Fast quotes and reliable scheduling.",
+    "ogImage": "/og.jpg"
+  },
   "hero": {
     "headline": "Pressure Washing That Instantly Boosts Curb Appeal",
     "subheadline": "Driveways, sidewalks, siding, patios, fences, and more. Fast quotes and reliable scheduling.",

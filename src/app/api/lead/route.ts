@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -20,11 +18,9 @@ function escapeHtml(str: string) {
 function looksSpammy(message: string) {
   const lower = message.toLowerCase();
 
-  // Too many links is a big signal
   const linkCount = (lower.match(/https?:\/\//g) || []).length;
   if (linkCount >= 2) return true;
 
-  // Common spam keywords (light touch)
   const spamKeywords = [
     "crypto",
     "bitcoin",
@@ -38,7 +34,6 @@ function looksSpammy(message: string) {
   ];
   if (spamKeywords.some((k) => lower.includes(k))) return true;
 
-  // Extremely long messages can be abuse
   if (message.length > 2000) return true;
 
   return false;
@@ -47,7 +42,7 @@ function looksSpammy(message: string) {
 // Basic origin check (prevents random sites from hitting your endpoint)
 function isAllowedOrigin(req: Request) {
   const allowed = process.env.ALLOWED_ORIGINS;
-  if (!allowed) return true; // allow all if not configured
+  if (!allowed) return true;
 
   const origin = req.headers.get("origin");
   if (!origin) return false;
@@ -58,6 +53,16 @@ function isAllowedOrigin(req: Request) {
 
 export async function POST(req: Request) {
   try {
+    // ✅ IMPORTANT: don't instantiate Resend at module scope
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "Server is not configured (missing RESEND_API_KEY)." },
+        { status: 500 }
+      );
+    }
+    const resend = new Resend(apiKey);
+
     if (!isAllowedOrigin(req)) {
       return NextResponse.json({ error: "Forbidden." }, { status: 403 });
     }
@@ -72,7 +77,6 @@ export async function POST(req: Request) {
     // Honeypot support (optional)
     const gotcha = String(body?._gotcha || "").trim();
     if (gotcha) {
-      // Pretend success to waste bot time
       return NextResponse.json({ ok: true });
     }
 
@@ -88,15 +92,14 @@ export async function POST(req: Request) {
     }
 
     if (looksSpammy(message)) {
-      // Don’t tell them it’s spam; just fail politely
       return NextResponse.json(
         { error: "Unable to submit. Please call instead." },
         { status: 400 }
       );
     }
 
-    const to = process.env.LEADS_TO_EMAIL;
-    const from = process.env.LEADS_FROM_EMAIL;
+    const to = process.env.LEAD_TO_EMAIL;
+    const from = process.env.LEAD_FROM_EMAIL;
 
     if (!to || !from) {
       return NextResponse.json(

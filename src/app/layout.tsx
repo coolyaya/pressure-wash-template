@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { LocalBusinessSchema } from "@/components/site/LocalBusinessSchema";
+import { ThemeInjector } from "@/components/site/ThemeInjector";
 
 export const metadata: Metadata = {
   metadataBase: site.seo?.siteUrl ? new URL(site.seo.siteUrl) : undefined,
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <ThemeInjector />
         <LocalBusinessSchema />
         {children}
       </body>
