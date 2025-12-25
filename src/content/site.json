@@ -1,30 +1,35 @@
 {
   "businessName": "BrightWash Pressure Washing",
   "tagline": "Exterior cleaning that makes your home look brand new.",
-  "phone": "(555) 123-4567",
-  "email": "brightwash@example.com",
+  "phone": "TODO_REPLACE_PHONE",
+  "email": "TODO_REPLACE_EMAIL",
   "city": "Tampa, FL",
   "serviceAreas": ["Tampa", "Brandon", "Riverview", "Plant City"],
   "primaryCta": "Get a Free Quote",
-
   "forms": {
-    "quoteFormAction": "https://formspree.io/f/xwvejjjd",
-    "redirectUrl": "https://pressure-wash-template.vercel.app/thanks"
+    "redirectUrl": "/thanks"
   },
-
   "nav": [
     { "label": "Home", "href": "/" },
     { "label": "Services", "href": "/services" },
     { "label": "About", "href": "/about" },
     { "label": "Contact", "href": "/contact" }
   ],
-
+  "seo": {
+  "siteUrl": "https://pressure-wash-template.vercel.app",
+  "defaultTitle": "BrightWash Pressure Washing | Tampa, FL",
+  "defaultDescription": "Licensed & insured pressure washing in Tampa, FL. Driveways, sidewalks, house washing (soft wash), patios, and fences. Fast quotes and reliable scheduling.",
+  "ogImage": "/og.jpg"
+},
   "hero": {
     "headline": "Pressure Washing That Instantly Boosts Curb Appeal",
     "subheadline": "Driveways, sidewalks, siding, patios, fences, and more. Fast quotes and reliable scheduling.",
-    "bullets": ["Licensed & insured", "Soft wash safe for siding", "Satisfaction guaranteed"]
+    "bullets": [
+      "Licensed & insured",
+      "Soft wash safe for siding",
+      "Satisfaction guaranteed"
+    ]
   },
-
   "services": [
     {
       "title": "Driveway & Sidewalk Cleaning",
@@ -43,7 +48,6 @@
       "desc": "Restore fences by removing discoloration, algae, and dirt buildup."
     }
   ],
-
   "reviews": [
     {
       "name": "Sarah M.",
@@ -58,12 +62,10 @@
       "text": "Super fair pricing and the results were better than expected."
     }
   ],
-
   "about": {
     "headline": "Local Pressure Washing With Professional Results",
     "body": "We help homeowners and small businesses keep their exterior surfaces clean and protected. From driveways to siding, we use the right cleaning method for the job."
   },
-
   "faq": [
     {
       "q": "How much does pressure washing cost?",
@@ -78,7 +80,6 @@
       "a": "Most jobs can be scheduled within a few days depending on weather and availability."
     }
   ],
-
   "footer": {
     "hours": "Mon–Sat: 8am–6pm",
     "license": "Licensed & Insured",

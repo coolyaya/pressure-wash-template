@@ -1,6 +1,12 @@
-import site from "@/content/site.json";
+import type { Metadata } from "next";
+import { site } from "@/lib/site";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: `Learn about ${site.businessName} — local, licensed & insured exterior cleaning in ${site.city}.`,
+};
 
 export default function AboutPage() {
   return (

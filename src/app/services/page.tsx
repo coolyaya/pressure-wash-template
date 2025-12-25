@@ -1,6 +1,12 @@
-import site from "@/content/site.json";
+import type { Metadata } from "next";
+import { site } from "@/lib/site";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description: `Pressure washing services in ${site.city}: driveway cleaning, house washing (soft wash), patios, decks, and fences.`,
+};
 
 export default function ServicesPage() {
   return (
