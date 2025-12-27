@@ -16,7 +16,6 @@ export const metadata: Metadata = {
     description: site.seo?.defaultDescription || site.tagline,
     url: site.seo?.siteUrl,
     siteName: site.businessName,
-    images: site.seo?.ogImage ? [site.seo.ogImage] : [],
     locale: "en_US",
     type: "website",
   },
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.seo?.defaultTitle || site.businessName,
     description: site.seo?.defaultDescription || site.tagline,
-    images: site.seo?.ogImage ? [site.seo.ogImage] : [],
   },
 };
 

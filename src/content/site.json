@@ -16,7 +16,7 @@
 
   "businessName": "BrightWash Pressure Washing",
   "tagline": "Exterior cleaning that makes your home look brand new.",
-  "phone": "TODO_REPLACE_PHONE",
+  "phone": "(813) 555-0123",
   "email": "TODO_REPLACE_EMAIL",
   "city": "Tampa, FL",
   "serviceAreas": ["Tampa", "Brandon", "Riverview", "Plant City"],
@@ -33,8 +33,7 @@
   "seo": {
     "siteUrl": "https://pressure-wash-template.vercel.app",
     "defaultTitle": "BrightWash Pressure Washing | Tampa, FL",
-    "defaultDescription": "Licensed & insured pressure washing in Tampa, FL. Driveways, sidewalks, house washing (soft wash), patios, and fences. Fast quotes and reliable scheduling.",
-    "ogImage": "/og.jpg"
+    "defaultDescription": "Licensed & insured pressure washing in Tampa, FL. Driveways, sidewalks, house washing (soft wash), patios, and fences. Fast quotes and reliable scheduling."
   },
   "hero": {
     "headline": "Pressure Washing That Instantly Boosts Curb Appeal",

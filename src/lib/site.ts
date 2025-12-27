@@ -37,7 +37,6 @@ export type Site = {
     siteUrl: string;
     defaultTitle: string;
     defaultDescription: string;
-    ogImage: string;
   };
 
   hero: {
@@ -88,7 +87,7 @@ function assertSiteConfig(input: unknown): asserts input is Site {
   }
 
   const seo = s["seo"] as Record<string, unknown>;
-  for (const key of ["siteUrl", "defaultTitle", "defaultDescription", "ogImage"]) {
+  for (const key of ["siteUrl", "defaultTitle", "defaultDescription"]) {
     if (!seo || seo[key] == null || seo[key] === "") {
       throw new Error(`Missing site.seo.${key} in site.json`);
     }
