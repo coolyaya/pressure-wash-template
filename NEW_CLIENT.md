@@ -29,6 +29,7 @@ Edit `src/content/site.json`:
 - [ ] theme.brand.primary
 - [ ] theme.brand.secondary
 - [ ] theme.radius
+- [ ] Choose layout variant: site.layout = "A" | "B" | "C"
 - [ ] layout (A | B | C)
 
 ### Assets

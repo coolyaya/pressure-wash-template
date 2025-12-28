@@ -1,6 +1,7 @@
 import raw from "@/content/site.json";
 
 export type Site = {
+  layout: "A" | "B" | "C";
   theme: {
     brand: {
       primary: string;
